@@ -63,3 +63,21 @@ export const updateBrewery = async (req: Request, res: Response) => {
         res.status(500).json({ error: 'Failed to update brewery' });
     }
 };
+
+export const deleteBrewery = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+
+        const result = await query('DELETE FROM breweries WHERE id_brewery = $1 RETURNING *', [id]);
+
+        if (result.rowCount === 0) {
+            res.status(404).json({ error: 'Brewery not found' });
+            return;
+        }
+
+        res.json({ message: 'Brewery deleted successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to delete brewery' });
+    }
+};
