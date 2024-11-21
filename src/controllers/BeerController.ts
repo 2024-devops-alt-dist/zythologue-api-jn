@@ -53,3 +53,28 @@ export const createBeer = async (req: Request, res: Response): Promise<void> => 
         res.status(500).json({ error: 'Failed to create beer' });
     }
 };
+
+export const updateBeer = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const { id } = req.params;
+        const { name, description, abv, price } = req.body;
+
+        const result = await query(
+            `UPDATE beers
+             SET name = $1, description = $2, abv = $3, price = $4
+             WHERE id_beer = $5
+             RETURNING *`,
+            [name, description, abv, price, id]
+        );
+
+        if (result.rowCount === 0) {
+            res.status(404).json({ error: 'Beer not found' });
+            return;
+        }
+
+        res.json(result.rows[0]);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to update beer' });
+    }
+};
