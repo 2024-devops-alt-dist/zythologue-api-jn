@@ -24,3 +24,20 @@ export const createBrewery = async (req: Request, res: Response) => {
         res.status(500).json({ error: 'Failed to create brewery' });
     }
 };
+
+export const getBreweryById = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        const result = await query('SELECT * FROM breweries WHERE id_brewery = $1', [id]);
+
+        if (result.rowCount === 0) {
+            res.status(404).json({ error: 'Brewery not found' });
+            return;
+        }
+
+        res.json(result.rows[0]);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to fetch brewery' });
+    }
+};
