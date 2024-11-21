@@ -78,3 +78,31 @@ export const updateBeer = async (req: Request, res: Response): Promise<void> => 
         res.status(500).json({ error: 'Failed to update beer' });
     }
 };
+
+export const deleteBeer = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const { id } = req.params;
+
+        const result = await query('DELETE FROM beers WHERE id_beer = $1 RETURNING *', [id]);
+
+        if (result.rowCount === 0) {
+            res.status(404).json({ error: 'Beer not found' });
+            return;
+        }
+
+        res.json({ message: 'Beer deleted successfully' });
+    } catch (error) {
+        if (error instanceof Error) {
+            if ((error as any).code === '23503') { // Cast error as any if code isn't part of Error
+                res.status(400).json({
+                    error: 'Cannot delete beer because it is referenced in reviews. Please delete associated reviews first.',
+                });
+            } else {
+                res.status(500).json({ error: error.message });
+            }
+        } else {
+            console.error('Unknown error occurred:', error);
+            res.status(500).json({ error: 'An unexpected error occurred' });
+        }
+    }
+};
