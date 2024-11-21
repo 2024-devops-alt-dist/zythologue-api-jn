@@ -37,3 +37,19 @@ export const getBeerById = async (req: Request, res: Response): Promise<void> =>
         res.status(500).json({ error: 'Failed to fetch beer' });
     }
 };
+
+export const createBeer = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const { id_brewery, name, description, abv, price } = req.body;
+        const result = await query(
+            `INSERT INTO beers (id_beer, id_brewery, name, description, abv, price)
+             VALUES (gen_random_uuid(), $1, $2, $3, $4, $5)
+             RETURNING *`,
+            [id_brewery, name, description, abv, price]
+        );
+        res.status(201).json(result.rows[0]);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to create beer' });
+    }
+};
