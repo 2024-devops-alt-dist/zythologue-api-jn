@@ -41,3 +41,25 @@ export const getBreweryById = async (req: Request, res: Response) => {
         res.status(500).json({ error: 'Failed to fetch brewery' });
     }
 };
+
+export const updateBrewery = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        const { name, country } = req.body;
+
+        const result = await query(
+            'UPDATE breweries SET name = $1, country = $2 WHERE id_brewery = $3 RETURNING *',
+            [name, country, id]
+        );
+
+        if (result.rowCount === 0) {
+            res.status(404).json({ error: 'Brewery not found' });
+            return;
+        }
+
+        res.json(result.rows[0]);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to update brewery' });
+    }
+};
