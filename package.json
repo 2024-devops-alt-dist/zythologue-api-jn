@@ -1,0 +1,24 @@
+{
+  "name": "zythologue-api-jn",
+  "version": "1.0.0",
+  "description": "This is the backend API for Zythologue, a beer and brewery management platform. Built with Node.js and powered by PostgreSQL, this project provides a robust RESTful API for managing breweries and their beers.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "pg": "^8.13.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.6.3"
+  }
+}
