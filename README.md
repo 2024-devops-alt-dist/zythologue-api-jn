@@ -11,6 +11,16 @@ This is the backend API for Zythologue, a beer and brewery management platform. 
 - Docker support for containerization
 - Swagger documentation for API
 
+### Set Up the Database
+
+First, clone and run the database repository:
+
+```bash
+git clone git@github.com:2024-devops-alt-dist/zythologue-jn.git
+cd zythologue-jn
+docker-compose up -d
+```
+
 ## Run Locally
 
 Clone the project
