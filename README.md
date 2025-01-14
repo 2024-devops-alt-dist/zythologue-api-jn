@@ -74,7 +74,7 @@ docker build -t zythologue-api-jn .
 Run the docker image using a specified network
 
 ```bash
-docker run --name zythologue-api-jn --network=simplon-local --env-file .env -p 3000:3000 zythologue-api-jn
+docker run --name zythologue-api-jn --network=zythologue-jn_simplon-local --env-file .env -p 3000:3000 zythologue-api-jn
 ```
 
 ## API Documentation
