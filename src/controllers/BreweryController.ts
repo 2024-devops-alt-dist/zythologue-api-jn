@@ -42,6 +42,17 @@ export const getBreweryById = async (req: Request, res: Response) => {
     }
 };
 
+export const getBeersByBreweryId = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    try {
+        const result = await query('SELECT * FROM beers WHERE id_brewery = $1', [id]);
+        res.json(result.rows);
+    } catch (error) {
+        console.error('Error fetching beers:', error);
+        res.status(500).send('Error fetching beers');
+    }
+};
+
 export const updateBrewery = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;

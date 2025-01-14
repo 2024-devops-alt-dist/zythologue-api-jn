@@ -3,6 +3,7 @@ import {
     getBreweries,
     createBrewery,
     getBreweryById,
+    getBeersByBreweryId,
     updateBrewery,
     deleteBrewery
 } from '../controllers/BreweryController';
@@ -78,6 +79,8 @@ router.get('/breweries', getBreweries);
  *         description: Brewery not found
  */
 router.get('/breweries/:id', getBreweryById);
+
+router.get('/breweries/:id/beers', getBeersByBreweryId)
 
 /**
  * @swagger
