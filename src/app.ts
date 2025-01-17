@@ -8,7 +8,7 @@ import {swaggerSpec, swaggerUi} from "./swagger";
 const app = express();
 
 app.use(cors({
-    origin: 'http://localhost:5174', // Frontend URL
+    origin: 'http://localhost:5173', // Frontend URL
 }));
 app.use(express.json());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
