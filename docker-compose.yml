@@ -1,36 +1,36 @@
-version: '3.8'
-
-services:
-  app:
-    build:
-      context: .
-    container_name: zythologue_api
-    networks:
-      - simplon-local
-    ports:
-      - "3000:3000"
-    environment:
-      DB_USER: user
-      DB_PASSWORD: password
-      DB_HOST: postgres
-      DB_PORT: 5432
-      DB_NAME: zythologue_db
-    depends_on:
-      - postgres
-
-  postgres:
-    image: postgres:15
-    container_name: postgres_brief
-    networks:
-      - simplon-local
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: mypassword
-      POSTGRES_DB: zythologue_db
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
-
-volumes:
-  postgres-data:
+#version: '3.8'
+#
+#services:
+#  app:
+#    build:
+#      context: .
+#    container_name: zythologue_api
+#    networks:
+#      - simplon-local
+#    ports:
+#      - "3000:3000"
+#    environment:
+#      DB_USER: user
+#      DB_PASSWORD: password
+#      DB_HOST: postgres
+#      DB_PORT: 5432
+#      DB_NAME: zythologue_db
+#    depends_on:
+#      - postgres
+#
+#  postgres:
+#    image: postgres:15
+#    container_name: postgres_brief
+#    networks:
+#      - simplon-local
+#    environment:
+#      POSTGRES_USER: user
+#      POSTGRES_PASSWORD: mypassword
+#      POSTGRES_DB: zythologue_db
+#    ports:
+#      - "5432:5432"
+#    volumes:
+#      - postgres-data:/var/lib/postgresql/data
+#
+#volumes:
+#  postgres-data:

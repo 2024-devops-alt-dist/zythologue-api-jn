@@ -1,16 +1,17 @@
-// @ts-ignore
-import { Pool } from 'pg';
+import {Pool} from "pg";
 import dotenv from 'dotenv';
 
 dotenv.config();
 
 const pool = new Pool({
-    user: process.env.DB_USER,
-    host: process.env.DB_HOST,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASSWORD,
-    port: parseInt(process.env.DB_PORT || '5432', 10),
+    connectionString: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false }
 });
+//
+// export const query = (text: string, params?: any[]) => {
+//     return pool.query(text, params);
+// };
+//
 
 export const query = (text: string, params?: any[]) => {
     return pool.query(text, params);
