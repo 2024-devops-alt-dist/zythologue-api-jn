@@ -3,6 +3,7 @@ import {Pool} from 'pg';
 import cors from 'cors';
 import express from 'express';
 import beerRoutes from './routes/BeerRoutes'
+import breweryRoutes from "./routes/BreweryRoutes";
 import {swaggerSpec, swaggerUi} from "./swagger";
 
 dotenv.config();
@@ -25,5 +26,6 @@ app.use(cors());
 app.use(express.json());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(beerRoutes);
+app.use(breweryRoutes);
 
 export default app;
